@@ -24,6 +24,3 @@ A minimal Express.js portfolio site using htmx for dynamic content loading.
 - `index.js` - Main server file
 - `views/` - EJS templates
 - `public/` - Static files (CSS, images, JS)
-
-## Example htmx Usage
-- The homepage loads an About section via htmx when the button is clicked.
