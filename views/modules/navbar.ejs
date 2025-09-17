@@ -1,0 +1,189 @@
+<style>
+  .side-drawer {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 220px;
+    height: 100%;
+    background: #181a1b;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    z-index: 1050;
+    transition: left 0.3s cubic-bezier(.4,0,.2,1);
+    padding: 2rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .side-drawer.open {
+    left: 0;
+  }
+  @media (min-width: 992px) {
+    #sideDrawer {
+      display: none !important;
+    }
+  }
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      display: none !important;
+    }
+  }
+  .close-drawer {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 1;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    align-self: flex-end;
+    cursor: pointer;
+    outline: none;
+    box-shadow: none;
+    transition: color 0.2s;
+  }
+  .close-drawer:hover,
+  .close-drawer:focus {
+    color: #ff6b6b;
+    outline: none;
+    box-shadow: none;
+  }
+</style>
+<script>
+  function setupDrawerToggle() {
+    var drawerToggle = document.getElementById('drawerToggle');
+    var sideDrawer = document.getElementById('sideDrawer');
+    if (drawerToggle && sideDrawer) {
+      var closeDrawer = sideDrawer.querySelector('.close-drawer');
+      drawerToggle.onclick = function() {
+        console.log('Hamburger menu clicked');
+        sideDrawer.classList.add('open');
+      };
+      if (closeDrawer) {
+        closeDrawer.onclick = function() {
+          sideDrawer.classList.remove('open');
+        };
+      }
+      sideDrawer.querySelectorAll('.nav-link').forEach(function(link) {
+        link.onclick = function() {
+          sideDrawer.classList.remove('open');
+        };
+      });
+    } else {
+      console.log('drawerToggle or sideDrawer not found');
+    }
+  }
+
+  // Add navbar toggle functionality on initial load
+  document.addEventListener('DOMContentLoaded', setupDrawerToggle);
+
+  // Reapply navbar toggle functionality after HTMX content swap
+  document.body.addEventListener('htmx:afterSwap', function(evt) {
+    setupDrawerToggle();
+  });
+</script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/" hx-get="/" hx-target="body" hx-swap="innerHTML" hx-push-url="true">Noah Poling Portfolio</a>
+    <button class="navbar-toggler" type="button" id="drawerToggle" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link <%= currentPage === 'home' ? 'active' : '' %>" 
+             href="/" 
+             hx-get="/page/home" 
+             hx-target="body" 
+             hx-swap="innerHTML" 
+             hx-push-url="true">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= currentPage === 'projects' ? 'active' : '' %>" 
+             href="/page/projects" 
+             hx-get="/page/projects" 
+             hx-target="body" 
+             hx-swap="innerHTML" 
+             hx-push-url="true">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= currentPage === 'work_experience' ? 'active' : '' %>" 
+             href="/page/work_experience" 
+             hx-get="/page/work_experience" 
+             hx-target="body" 
+             hx-swap="innerHTML" 
+             hx-push-url="true">Work Experience</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <%= currentPage === 'repositories' ? 'active' : '' %>" 
+                href="/page/repositories" 
+                hx-get="/page/repositories" 
+                hx-target="body" 
+                hx-swap="innerHTML" 
+                hx-push-url="true">Repositories</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="sideDrawer" class="side-drawer">
+    <button type="button" class="close-drawer" aria-label="Close">&times;</button>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link <%= currentPage === 'home' ? 'active' : '' %>" 
+           href="/" 
+           hx-get="/page/home" 
+           hx-target="body" 
+           hx-swap="innerHTML" 
+           hx-push-url="true">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= currentPage === 'projects' ? 'active' : '' %>" 
+           href="/page/projects" 
+           hx-get="/page/projects" 
+           hx-target="body" 
+           hx-swap="innerHTML" 
+           hx-push-url="true">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= currentPage === 'work_experience' ? 'active' : '' %>" 
+           href="/page/work_experience" 
+           hx-get="/page/work_experience" 
+           hx-target="body" 
+           hx-swap="innerHTML" 
+           hx-push-url="true">Work Experience</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= currentPage === 'repositories' ? 'active' : '' %>" 
+            href="/page/repositories" 
+            hx-get="/page/repositories" 
+            hx-target="body" 
+            hx-swap="innerHTML" 
+            hx-push-url="true">Repositories</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var drawerToggle = document.getElementById('drawerToggle');
+    var sideDrawer = document.getElementById('sideDrawer');
+    if (drawerToggle && sideDrawer) {
+      var closeDrawer = sideDrawer.querySelector('.close-drawer');
+      drawerToggle.addEventListener('click', function() {
+        console.log('Hamburger menu clicked'); // Debug log
+        sideDrawer.classList.add('open');
+      });
+      if (closeDrawer) {
+        closeDrawer.addEventListener('click', function() {
+          sideDrawer.classList.remove('open');
+        });
+      }
+      sideDrawer.querySelectorAll('.nav-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+          sideDrawer.classList.remove('open');
+        });
+      });
+    } else {
+      console.log('drawerToggle or sideDrawer not found');
+    }
+  });
+</script>

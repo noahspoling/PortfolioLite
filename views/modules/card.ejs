@@ -1,0 +1,53 @@
+<div class="repo-card">
+  <h3>
+    <a href="<%= repo.html_url %>" target="_blank" rel="noopener">
+      <%= repo.name %>
+    </a>
+  </h3>
+  <p><%= repo.description || 'No description' %></p>
+  <div class="repo-meta">
+    <span>⭐ <%= repo.stargazers_count %></span>
+    <span>🍴 <%= repo.forks_count %></span>
+    <span><%= repo.language || '' %></span>
+  </div>
+  <% if (repo.homepage || (repo.topics && repo.topics.includes('demo'))) { %>
+    <div class="repo-links" style="margin-top:0.5rem;">
+      <% if (repo.homepage) { %>
+        <a href="<%= repo.homepage %>" target="_blank" rel="noopener" class="btn btn-sm btn-primary me-2">Live Site</a>
+      <% } %>
+      <% if (repo.topics && repo.topics.includes('demo')) { %>
+        <a href="<%= repo.html_url %>/demo" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">Demo</a>
+      <% } %>
+    </div>
+  <% } %>
+</div>
+<style>
+  .repo-card {
+    background: #232526;
+    border-radius: 8px;
+    padding: 1.25rem 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 120px;
+  }
+  .repo-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    word-break: break-all;
+  }
+  .repo-card p {
+    flex: 1;
+    margin-bottom: 0.5rem;
+    color: #ccc;
+    font-size: 0.95rem;
+  }
+  .repo-meta {
+    font-size: 0.85rem;
+    color: #aaa;
+    display: flex;
+    gap: 1rem;
+  }
+</style>
