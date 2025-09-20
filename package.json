@@ -1,13 +1,22 @@
 {
   "name": "portfolio-lite",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/api.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "dev": "tsx watch src/api.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node --enable-source-maps dist/api.js"
   },
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.7.4",
+    "tsx": "^4.15.7",
+    "typescript": "^5.6.3"
   }
 }
