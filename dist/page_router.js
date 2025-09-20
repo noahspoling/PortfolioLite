@@ -49,7 +49,6 @@ router.get('/repositories', async (_req, res) => {
         res.render('index', { currentPage: 'repositories', repos });
     }
 });
-// 404 handler
 router.use((_req, res) => {
     res.status(404).render('404');
 });
